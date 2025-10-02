@@ -3,19 +3,25 @@ package main
 import "fmt"
 
 func main() {
-	data := []string{"cat", "cat", "dog", "cat", "tree"}
-
-	m := make(map[string]struct{})
-
-	for _, item := range data {
-		m[item] = struct{}{}
+	testArrays := [][]string{
+		{"cat", "cat", "dog", "cat", "tree"},
+		{"zombie", "dwarf", "loxodon", "elf", "loxodon"},
+		{"apple", "orange", "apple", "peach", "peach"},
 	}
 
-	res := make([]string, 0, len(m))
-	for key := range m {
-		res = append(res, key)
+	for _, arr := range testArrays {
+		m := make(map[string]struct{})
+		
+		for _, item := range arr {
+			m[item] = struct{}{}
+		}
+
+		res := make([]string, 0, len(m))
+		for key := range m {
+			res = append(res, key)
+		}
+		
+		fmt.Printf("Input slice: %v\n", arr)
+		fmt.Printf("Output slice: %v\n\n", res)
 	}
-	
-	fmt.Printf("iput slice: %v\n", data)
-	fmt.Printf("resulting slice: %v\n", res)
 }

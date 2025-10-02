@@ -257,7 +257,7 @@ func worker6(shutdown *int32, wg *sync.WaitGroup, id int) {
 
 func main() {
 	// Uncomment one of:
-	// method1_ContextCancel() // RECOMMEND, idiomatic, support timeout's/deadline's
+	method1_ContextCancel() // RECOMMEND, idiomatic, support timeout's/deadline's
 	// method2_DoneChannel() // SIMPLE PROGS, min dependencies
 	// method3_ContextWithTimeout() // PRODUCTION, guarantee completion in time
 	// method4_BroadcastChannel() // MANY GOROUTINES, don't require worker loop, notification via close()

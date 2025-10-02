@@ -202,5 +202,5 @@ func main() {
 	time.Sleep(200 * time.Millisecond)
 
 	
-	fmt.Println("\nDEMONSTRATIONS HAVE ENDED")
+	fmt.Println("\nDemonstration have ended")
 }

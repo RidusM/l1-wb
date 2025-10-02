@@ -10,10 +10,12 @@ func main() {
 
 	wg := sync.WaitGroup{}
 
-	for _, val := range in{
-		wg.Go(func(){
-			fmt.Printf("%d\n", val*val)
-		})
+	for _, val := range in {
+		wg.Add(1)
+		go func(num int) {
+			defer wg.Done()
+			fmt.Printf("%d\n", num*num)
+		}(val)
 	}
 	wg.Wait()
 }

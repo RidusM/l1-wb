@@ -5,16 +5,18 @@ import (
 	"flag"
 	"fmt"
 	"math/rand/v2"
+	"os"
 	"os/signal"
 	"sync"
 	"syscall"
+	"time"
 )
 
 func main() {
 	wFlags := flag.Int("workers", 10, "number of workers")
 	flag.Parse()
 
-	ctx, cancel := signal.NotifyContext(context.Background(), syscall.SIGTERM, syscall.SIGTERM)
+	ctx, cancel := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM, syscall.SIGTERM)
 	defer cancel()
 
 	jobs := make(chan int, *wFlags)
@@ -51,6 +53,7 @@ func worker(ctx context.Context, counter int, jobs <-chan int, wg *sync.WaitGrou
 				return
 			}
 			fmt.Printf("Worker:%d, Result:%d\n", counter+1, job)
+			time.Sleep(500 * time.Millisecond)
 		case <-ctx.Done():
 			return
 		}

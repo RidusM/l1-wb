@@ -357,5 +357,5 @@ func main() {
 	
 	method12Panic()
 	
-	fmt.Println("\nDEMONSTRATIONS HAVE ENDED")
+	fmt.Println("\nDemonstrate have ended")
 }
