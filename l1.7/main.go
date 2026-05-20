@@ -45,10 +45,10 @@ func (sm *SafeMapMutex) Len() int {
 
 func mutexExample() {
 	fmt.Println("\nMethod 1: sync.Mutex")
-	
+
 	safeMap := NewSafeMapMutex()
 	var wg sync.WaitGroup
-	
+
 	for i := 0; i < 10; i++ {
 		wg.Add(1)
 		go func(id int) {
@@ -57,7 +57,7 @@ func mutexExample() {
 			time.Sleep(10 * time.Millisecond)
 		}(i)
 	}
-	
+
 	for i := 0; i < 5; i++ {
 		wg.Add(1)
 		go func(id int) {
@@ -68,7 +68,7 @@ func mutexExample() {
 			time.Sleep(10 * time.Millisecond)
 		}(i)
 	}
-	
+
 	wg.Wait()
 	fmt.Printf("Total elements: %d\n", safeMap.Len())
 }
@@ -107,7 +107,7 @@ func (sm *SafeMapRWMutex) Delete(key int) {
 func (sm *SafeMapRWMutex) Keys() []int {
 	sm.mu.RLock()
 	defer sm.mu.RUnlock()
-	
+
 	keys := make([]int, 0, len(sm.m))
 	for k := range sm.m {
 		keys = append(keys, k)
@@ -117,10 +117,10 @@ func (sm *SafeMapRWMutex) Keys() []int {
 
 func rwMutexExample() {
 	fmt.Println("\nMethod 2: sync.RWMutex")
-	
+
 	safeMap := NewSafeMapRWMutex()
 	var wg sync.WaitGroup
-	
+
 	// 5 писателей
 	for i := 0; i < 5; i++ {
 		wg.Add(1)
@@ -130,9 +130,9 @@ func rwMutexExample() {
 			fmt.Printf("Get: key=%d\n", id)
 		}(i)
 	}
-	
+
 	time.Sleep(50 * time.Millisecond)
-	
+
 	for i := 0; i < 20; i++ {
 		wg.Add(1)
 		go func(id int) {
@@ -143,7 +143,7 @@ func rwMutexExample() {
 			}
 		}(i)
 	}
-	
+
 	wg.Wait()
 	fmt.Printf("Keys in map: %v\n", safeMap.Keys())
 }
@@ -151,10 +151,10 @@ func rwMutexExample() {
 // Method 3: sync.Map
 func syncMapExample() {
 	fmt.Println("\nMethod 3: sync.Map")
-	
+
 	var sm sync.Map
 	var wg sync.WaitGroup
-	
+
 	for i := 0; i < 10; i++ {
 		wg.Add(1)
 		go func(id int) {
@@ -163,23 +163,23 @@ func syncMapExample() {
 			fmt.Printf("Save: %d\n", id)
 		}(i)
 	}
-	
+
 	wg.Wait()
-	
+
 	fmt.Println("\nRead all elements:")
 	sm.Range(func(key, value interface{}) bool {
 		fmt.Printf("  key=%v, value=%v\n", key, value)
 		return true
 	})
-	
+
 	sm.Delete(5)
-	
+
 	if val, ok := sm.Load(5); ok {
 		fmt.Printf("Find: %v\n", val)
 	} else {
 		fmt.Println("Key 5 has been removed")
 	}
-	
+
 	actual, loaded := sm.LoadOrStore(100, "new value")
 	if loaded {
 		fmt.Printf("Value already existed: %v\n", actual)
@@ -188,19 +188,17 @@ func syncMapExample() {
 	}
 }
 
-
 func main() {
 	fmt.Println("Demonstrate all method's")
-	
+
 	mutexExample()
 	time.Sleep(200 * time.Millisecond)
-	
+
 	rwMutexExample()
 	time.Sleep(200 * time.Millisecond)
-	
+
 	syncMapExample()
 	time.Sleep(200 * time.Millisecond)
 
-	
 	fmt.Println("\nDemonstration have ended")
 }

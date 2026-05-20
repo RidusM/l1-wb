@@ -12,13 +12,13 @@ func reverseIterative(s string) string {
 
 func main() {
 	testArrays := []string{
-        "Reverse Engineering",
+		"Reverse Engineering",
 		"War.... War never changes",
 		"I wanna be hero",
-    }
-    
-    for _, val := range testArrays {
-        fmt.Printf("Input: %v\n", val)
-        fmt.Printf("Output: %v\n\n", reverseIterative(val))
-    }
+	}
+
+	for _, val := range testArrays {
+		fmt.Printf("Input: %v\n", val)
+		fmt.Printf("Output: %v\n\n", reverseIterative(val))
+	}
 }

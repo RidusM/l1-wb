@@ -223,7 +223,7 @@ func worker5(ctx context.Context, id int) error {
 		case <-ticker.C:
 			fmt.Printf("Worker %d: do something...\n", id)
 
-			// demo fail: if worker 2 failed, 
+			// demo fail: if worker 2 failed,
 			// errgroup cancel context for workers 1 and 3
 			if id == 2 {
 				// Uncomment for check auto-cancel

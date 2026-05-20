@@ -11,7 +11,7 @@ func main() {
 
 	for _, arr := range testArrays {
 		m := make(map[string]struct{})
-		
+
 		for _, item := range arr {
 			m[item] = struct{}{}
 		}
@@ -20,7 +20,7 @@ func main() {
 		for key := range m {
 			res = append(res, key)
 		}
-		
+
 		fmt.Printf("Input slice: %v\n", arr)
 		fmt.Printf("Output slice: %v\n\n", res)
 	}

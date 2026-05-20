@@ -18,11 +18,11 @@ import (
 
 // Вот так будет лучше, можно использовать buffer + copy, но предпочту strings
 func someFunc() string {
-    v := createHugeString(1 << 10)
-    return strings.Clone(v[:100])
+	v := createHugeString(1 << 10)
+	return strings.Clone(v[:100])
 }
 
-func createHugeString(size int) string{
+func createHugeString(size int) string {
 	return strings.Repeat("x", size)
 }
 

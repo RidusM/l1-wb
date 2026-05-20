@@ -20,17 +20,17 @@ func hasUniqueChars(s string) bool {
 
 func main() {
 	testCases := []string{
-        "abcd",
+		"abcd",
 		"abCdefAaf",
 		"AABCD",
 		"adAB",
 		"asdfghjkl",
 		"a",
 		"",
-    }
-    
-    for _, val := range testCases {
-        fmt.Printf("Input: %v\n", val)
-        fmt.Printf("Output: %v\n\n", hasUniqueChars(val))
-    }
+	}
+
+	for _, val := range testCases {
+		fmt.Printf("Input: %v\n", val)
+		fmt.Printf("Output: %v\n\n", hasUniqueChars(val))
+	}
 }

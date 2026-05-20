@@ -22,13 +22,13 @@ func method1WithInt() {
 
 	div := b / a
 	fmt.Printf("b / a: %d\n", div)
-	
+
 	fmt.Println()
 }
 
 func method2WithBigInt() {
 	aStr := "20000000000000000000"
-	bStr := "50000000000000000000" 
+	bStr := "50000000000000000000"
 
 	a, okA := new(big.Int).SetString(aStr, 10)
 	b, okB := new(big.Int).SetString(bStr, 10)
@@ -37,7 +37,7 @@ func method2WithBigInt() {
 		fmt.Println("error while convert string to big.Int")
 		return
 	}
-	
+
 	fmt.Printf("a = %s\nb = %s\n\n", a.String(), b.String())
 
 	sum := new(big.Int)
@@ -55,7 +55,7 @@ func method2WithBigInt() {
 	div := new(big.Int)
 	div.Div(b, a)
 	fmt.Printf("b / a: %s\n", div.String())
-	
+
 	fmt.Println()
 }
 

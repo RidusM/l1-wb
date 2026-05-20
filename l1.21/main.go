@@ -43,7 +43,7 @@ func (l *LoggerAdapter) Debug(message string) {
 
 func main() {
 	logger := NewLoggerAdapter("MyApp")
-	
+
 	logger.Info("App started")
 	logger.Debug("Loading config...")
 	logger.Error("Failed to open connection with database")
