@@ -122,7 +122,7 @@ func rwMutexExample() {
 	var wg sync.WaitGroup
 
 	// 5 писателей
-	for i := 0; i < 5; i++ {
+	for i := range 5 {
 		wg.Add(1)
 		go func(id int) {
 			defer wg.Done()

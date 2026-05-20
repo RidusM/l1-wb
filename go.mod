@@ -1,4 +1,4 @@
-module level1
+module levelone
 
 go 1.26.3
 
