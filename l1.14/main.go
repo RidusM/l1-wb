@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-func detectType(v interface{}) string {
+func detectType(v any) string {
 	switch v.(type) {
 	case int:
 		return "int"

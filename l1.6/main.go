@@ -232,9 +232,7 @@ func method9WaitGroup() {
 	var wg sync.WaitGroup
 	stop := make(chan struct{})
 
-	wg.Add(1)
-	go func() {
-		defer wg.Done()
+	wg.Go(func() {
 		ticker := time.NewTicker(200 * time.Millisecond)
 		defer ticker.Stop()
 
@@ -247,7 +245,7 @@ func method9WaitGroup() {
 				fmt.Printf("WaitGroup work... %d\n", i)
 			}
 		}
-	}()
+	})
 
 	time.Sleep(1 * time.Second)
 	close(stop)
@@ -330,7 +328,7 @@ func method12Panic() {
 		ticker := time.NewTicker(200 * time.Millisecond)
 		defer ticker.Stop()
 
-		for i := 0; i < 5; i++ {
+		for i := range 5 {
 			<-ticker.C
 			fmt.Printf("Work before panic... %d\n", i)
 			if i == 3 {

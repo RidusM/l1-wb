@@ -110,14 +110,12 @@ func testCounter(counter Counter, goroutines int, incrementsPerGoroutine int) {
 	var wg sync.WaitGroup
 	start := time.Now()
 
-	for i := 0; i < goroutines; i++ {
-		wg.Add(1)
-		go func() {
-			defer wg.Done()
-			for j := 0; j < incrementsPerGoroutine; j++ {
+	for range goroutines {
+		wg.Go(func() {
+			for range incrementsPerGoroutine {
 				counter.Increment()
 			}
-		}()
+		})
 	}
 
 	wg.Wait()

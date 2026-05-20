@@ -49,7 +49,7 @@ func mutexExample() {
 	safeMap := NewSafeMapMutex()
 	var wg sync.WaitGroup
 
-	for i := 0; i < 10; i++ {
+	for i := range 10 {
 		wg.Add(1)
 		go func(id int) {
 			defer wg.Done()
@@ -58,7 +58,7 @@ func mutexExample() {
 		}(i)
 	}
 
-	for i := 0; i < 5; i++ {
+	for i := range 5 {
 		wg.Add(1)
 		go func(id int) {
 			defer wg.Done()
@@ -133,7 +133,7 @@ func rwMutexExample() {
 
 	time.Sleep(50 * time.Millisecond)
 
-	for i := 0; i < 20; i++ {
+	for i := range 20 {
 		wg.Add(1)
 		go func(id int) {
 			defer wg.Done()
@@ -155,7 +155,7 @@ func syncMapExample() {
 	var sm sync.Map
 	var wg sync.WaitGroup
 
-	for i := 0; i < 10; i++ {
+	for i := range 10 {
 		wg.Add(1)
 		go func(id int) {
 			defer wg.Done()
@@ -167,7 +167,7 @@ func syncMapExample() {
 	wg.Wait()
 
 	fmt.Println("\nRead all elements:")
-	sm.Range(func(key, value interface{}) bool {
+	sm.Range(func(key, value any) bool {
 		fmt.Printf("  key=%v, value=%v\n", key, value)
 		return true
 	})
