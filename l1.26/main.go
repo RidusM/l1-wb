@@ -2,18 +2,22 @@ package main
 
 import (
 	"fmt"
-	"strings"
+	"unicode"
 )
 
 func hasUniqueChars(s string) bool {
-	s = strings.ToLower(s)
-	seen := make(map[rune]bool)
+	if len(s) <= 1{
+		return true
+	}
+
+	seen := make(map[rune]struct{}, len(s))
 
 	for _, char := range s {
-		if seen[char] {
+		lowerChar := unicode.ToLower(char)
+		if _, exists := seen[lowerChar]; exists {
 			return false
 		}
-		seen[char] = true
+		seen[lowerChar] = struct{}{}
 	}
 	return true
 }
